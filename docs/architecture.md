@@ -4,6 +4,8 @@
 
 This project serves QR and campaign redirect URLs for TUM Blockchain Club at `link.tum-blockchain.com`.
 
+The root route `/` redirects to `https://www.tum-blockchain.com/` and is intentionally not tracked. Tracking is reserved for explicit campaign links under `/q/[year]/[slug]` so analytics measure QR/link campaign performance rather than generic homepage traffic.
+
 Public links follow this format:
 
 ```text
