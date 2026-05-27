@@ -1,84 +1,84 @@
 [
   {
     "year": "26",
-    "slug": "fly-1",
+    "slug": "fly-01",
     "label": "Flyer 1",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-1"
+    "variant": "fly-01"
   },
   {
     "year": "26",
-    "slug": "fly-2",
+    "slug": "fly-02",
     "label": "Flyer 2",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-2"
+    "variant": "fly-02"
   },
   {
     "year": "26",
-    "slug": "fly-3",
+    "slug": "fly-03",
     "label": "Flyer 3",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-3"
+    "variant": "fly-03"
   },
   {
     "year": "26",
-    "slug": "fly-4",
+    "slug": "fly-04",
     "label": "Flyer 4",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-4"
+    "variant": "fly-04"
   },
   {
     "year": "26",
-    "slug": "fly-5",
+    "slug": "fly-05",
     "label": "Flyer 5",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-5"
+    "variant": "fly-05"
   },
   {
     "year": "26",
-    "slug": "fly-6",
+    "slug": "fly-06",
     "label": "Flyer 6",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-6"
+    "variant": "fly-06"
   },
   {
     "year": "26",
-    "slug": "fly-7",
+    "slug": "fly-07",
     "label": "Flyer 7",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-7"
+    "variant": "fly-07"
   },
   {
     "year": "26",
-    "slug": "fly-8",
+    "slug": "fly-08",
     "label": "Flyer 8",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-8"
+    "variant": "fly-08"
   },
   {
     "year": "26",
-    "slug": "fly-9",
+    "slug": "fly-09",
     "label": "Flyer 9",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "flyer",
     "campaign": "flyer-2026",
-    "variant": "fly-9"
+    "variant": "fly-09"
   },
   {
     "year": "26",
@@ -181,47 +181,47 @@
   },
   {
     "year": "26",
-    "slug": "roll-up-1",
+    "slug": "roll-up-01",
     "label": "Roll-up 1",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "roll-up",
     "campaign": "roll-up-2026",
-    "variant": "roll-up-1"
+    "variant": "roll-up-01"
   },
   {
     "year": "26",
-    "slug": "roll-up-2",
+    "slug": "roll-up-02",
     "label": "Roll-up 2",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "roll-up",
     "campaign": "roll-up-2026",
-    "variant": "roll-up-2"
+    "variant": "roll-up-02"
   },
   {
     "year": "26",
-    "slug": "roll-up-3",
+    "slug": "roll-up-03",
     "label": "Roll-up 3",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "roll-up",
     "campaign": "roll-up-2026",
-    "variant": "roll-up-3"
+    "variant": "roll-up-03"
   },
   {
     "year": "26",
-    "slug": "roll-up-4",
+    "slug": "roll-up-04",
     "label": "Roll-up 4",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "roll-up",
     "campaign": "roll-up-2026",
-    "variant": "roll-up-4"
+    "variant": "roll-up-04"
   },
   {
     "year": "26",
-    "slug": "roll-up-5",
+    "slug": "roll-up-05",
     "label": "Roll-up 5",
     "targetUrl": "https://www.tum-blockchain.com/",
     "origin": "roll-up",
     "campaign": "roll-up-2026",
-    "variant": "roll-up-5"
+    "variant": "roll-up-05"
   }
 ]

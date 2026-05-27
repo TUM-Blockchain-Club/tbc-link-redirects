@@ -21,13 +21,13 @@ Redirects are served through:
 Initial links:
 
 ```text
-/q/26/fly-1
-/q/26/fly-2
+/q/26/fly-01
+/q/26/fly-02
 ...
 /q/26/fly-20
-/q/26/roll-up-1
+/q/26/roll-up-01
 ...
-/q/26/roll-up-5
+/q/26/roll-up-05
 ```
 
 ## Tracking

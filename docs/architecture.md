@@ -13,8 +13,8 @@ Public links follow this format:
 Initial examples:
 
 ```text
-/q/26/fly-1
-/q/26/fly-2
+/q/26/fly-01
+/q/26/fly-02
 ```
 
 ## Redirect Source
@@ -92,9 +92,9 @@ Add a new entry to `src/lib/link-definitions.json`.
 For flyer variants, prefer one slug per printed QR code:
 
 ```text
-/q/26/fly-1
-/q/26/fly-2
-/q/26/fly-3
+/q/26/fly-01
+/q/26/fly-02
+/q/26/fly-03
 ```
 
 Group related links through shared metadata such as `origin: "flyer"` and `campaign: "flyer-2026"`.
