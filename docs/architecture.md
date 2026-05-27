@@ -19,9 +19,11 @@ Initial examples:
 
 ## Redirect Source
 
-Redirect targets are currently hardcoded in `src/lib/links.ts`. This keeps the pre-redirect path as fast as possible because the route does not need to fetch the target from Supabase before responding.
+Redirect targets are currently hardcoded from `src/lib/link-definitions.json`. This keeps the pre-redirect path as fast as possible because the route does not need to fetch the target from Supabase before responding.
 
 The code is still structured around a `getRedirectLink(year, slug)` lookup so the storage backend can later move to Supabase without changing public QR URLs.
+
+`link-definitions.json` is also synced into Supabase with `pnpm sync:links`. This avoids maintaining separate canonical link lists: code remains the source of truth for redirect behavior, while Supabase stores metadata for the membership analytics dashboard.
 
 ## Tracking Flow
 
@@ -58,6 +60,8 @@ The app intentionally does not store IP addresses, raw user agents, full referre
 
 The tracking table SQL lives in `supabase/link_redirect_clicks.sql`.
 
+The link metadata table SQL lives in `supabase/link_redirect_definitions.sql`.
+
 The production deployment needs:
 
 ```text
@@ -67,6 +71,14 @@ SUPABASE_SERVICE_ROLE_KEY
 
 The service role key is server-only and must never be exposed to client code.
 
+After changing canonical links, run:
+
+```bash
+pnpm sync:links
+```
+
+The sync updates canonical columns such as target URL, label, origin, campaign, and variant. Deployment fields such as `deployment_region`, `deployment_location`, `deployment_notes`, and `deployed_at` are intentionally not overwritten by the sync script, so the dashboard can manage those operational notes.
+
 ## Membership Dashboard Integration
 
 The membership management platform already uses Supabase Google OAuth via `auth.signInWithGoogle()` and loads dashboard access from `members_main`.
@@ -75,7 +87,7 @@ For the future analytics view, add it in that repository behind the existing das
 
 ## Adding Links
 
-Add a new entry to `LINKS` in `src/lib/links.ts`.
+Add a new entry to `src/lib/link-definitions.json`.
 
 For flyer variants, prefer one slug per printed QR code:
 

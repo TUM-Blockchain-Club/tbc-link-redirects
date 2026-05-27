@@ -23,14 +23,25 @@ Initial links:
 ```text
 /q/26/fly-1
 /q/26/fly-2
+...
+/q/26/fly-20
+/q/26/roll-up-1
+...
+/q/26/roll-up-5
 ```
 
 ## Tracking
 
-Targets are hardcoded in `src/lib/links.ts`. Click tracking is written to Supabase after the redirect response using Next.js `after()`.
+Targets are hardcoded from `src/lib/link-definitions.json`. Click tracking is written to Supabase after the redirect response using Next.js `after()`.
 
 The app stores datensparsame analytics fields: link metadata, sanitized target URL, referrer domain, device type, browser family, Vercel country, UTM query parameters, and click hour. It does not store IP addresses, raw user agents, full referrer URLs, or exact click timestamps.
 
-Apply `supabase/link_redirect_clicks.sql` before relying on production tracking.
+Apply `supabase/link_redirect_clicks.sql` and `supabase/link_redirect_definitions.sql` before relying on production tracking.
+
+Sync canonical links into Supabase metadata:
+
+```bash
+pnpm sync:links
+```
 
 More details are in `docs/architecture.md`.

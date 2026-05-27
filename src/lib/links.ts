@@ -1,6 +1,8 @@
+import linkDefinitions from "./link-definitions.json";
+
 export type LinkYear = "26";
 
-export type LinkOrigin = "flyer";
+export type LinkOrigin = "flyer" | "roll-up";
 
 export type RedirectLink = {
   year: LinkYear;
@@ -13,26 +15,7 @@ export type RedirectLink = {
   countryHint?: string;
 };
 
-export const LINKS: RedirectLink[] = [
-  {
-    year: "26",
-    slug: "fly-1",
-    label: "Flyer 1",
-    targetUrl: "https://www.tum-blockchain.com/",
-    origin: "flyer",
-    campaign: "flyer-2026",
-    variant: "fly-1",
-  },
-  {
-    year: "26",
-    slug: "fly-2",
-    label: "Flyer 2",
-    targetUrl: "https://www.tum-blockchain.com/",
-    origin: "flyer",
-    campaign: "flyer-2026",
-    variant: "fly-2",
-  },
-];
+export const LINKS = linkDefinitions as RedirectLink[];
 
 const linkMap = new Map(LINKS.map((link) => [`${link.year}/${link.slug}`, link]));
 
