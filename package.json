@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync:links": "node scripts/sync-link-definitions.mjs"
+    "sync:links": "node scripts/sync-link-definitions.mjs",
+    "promote:links": "node scripts/promote-soft-links.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",

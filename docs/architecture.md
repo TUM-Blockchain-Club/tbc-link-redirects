@@ -21,9 +21,9 @@ Initial examples:
 
 ## Redirect Source
 
-Redirect targets are currently hardcoded from `src/lib/link-definitions.json`. This keeps the pre-redirect path as fast as possible because the route does not need to fetch the target from Supabase before responding.
+Redirect targets first resolve from `src/lib/link-definitions.json`. This keeps promoted links as fast as possible because the route does not need to fetch the target from Supabase before responding.
 
-The code is still structured around a `getRedirectLink(year, slug)` lookup so the storage backend can later move to Supabase without changing public QR URLs.
+If a path is not hardcoded, the route falls back to Supabase `link_redirect_definitions`. This supports operational soft links created from the membership dashboard without changing the public URL shape.
 
 `link-definitions.json` is also synced into Supabase with `pnpm sync:links`. This avoids maintaining separate canonical link lists: code remains the source of truth for redirect behavior, while Supabase stores metadata for the membership analytics dashboard.
 
@@ -31,8 +31,9 @@ The code is still structured around a `getRedirectLink(year, slug)` lookup so th
 
 1. A visitor opens `/q/[year]/[slug]`.
 2. The route resolves the hardcoded link.
-3. The route immediately returns a temporary `302` redirect.
-4. Next.js `after()` schedules the Supabase insert after the response.
+3. If no hardcoded link exists, it fetches an active Supabase soft link for the same `year` and `slug`.
+4. If neither exists, it redirects to `https://www.tum-blockchain.com/`.
+5. Next.js `after()` schedules the Supabase tracking insert after the response.
 
 Tracking failures are logged but do not block redirects.
 
@@ -79,7 +80,15 @@ After changing canonical links, run:
 pnpm sync:links
 ```
 
-The sync updates canonical columns such as target URL, label, origin, campaign, and variant. Deployment fields such as `deployment_region`, `deployment_location`, `deployment_notes`, and `deployed_at` are intentionally not overwritten by the sync script, so the dashboard can manage those operational notes.
+The sync updates canonical columns such as target URL, label, origin, campaign, variant, `redirect_source`, `hardcoded_target_url`, and `hardcoded_synced_at`. Deployment fields such as `deployment_region`, `deployment_location`, `deployment_notes`, and `deployed_at` are intentionally not overwritten by the sync script, so the dashboard can manage those operational notes.
+
+To promote soft links or apply dashboard target changes to hardcoded links, run:
+
+```bash
+pnpm promote:links
+```
+
+This rewrites `src/lib/link-definitions.json` from active Supabase rows while preserving the exact public path. Commit and deploy the generated JSON, then run `pnpm sync:links` so the dashboard sees those rows as hardcoded again. At runtime, hardcoded links always win over Supabase rows with the same path.
 
 ## Membership Dashboard Integration
 

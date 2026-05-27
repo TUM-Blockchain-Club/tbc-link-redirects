@@ -32,7 +32,7 @@ Initial links:
 
 ## Tracking
 
-Targets are hardcoded from `src/lib/link-definitions.json`. Click tracking is written to Supabase after the redirect response using Next.js `after()`.
+Targets first resolve from `src/lib/link-definitions.json`. If a path is not hardcoded, the app falls back to an active Supabase soft link with the same `/q/[year]/[slug]` path. Click tracking is written to Supabase after the redirect response using Next.js `after()`.
 
 The app stores datensparsame analytics fields: link metadata, sanitized target URL, referrer domain, device type, browser family, Vercel country, UTM query parameters, and click hour. It does not store IP addresses, raw user agents, full referrer URLs, or exact click timestamps.
 
@@ -42,6 +42,12 @@ Sync canonical links into Supabase metadata:
 
 ```bash
 pnpm sync:links
+```
+
+Promote active Supabase soft links, or Supabase target changes for existing hardcoded links, into the hardcoded JSON:
+
+```bash
+pnpm promote:links
 ```
 
 More details are in `docs/architecture.md`.

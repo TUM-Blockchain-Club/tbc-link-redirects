@@ -41,6 +41,9 @@ async function main() {
     campaign: link.campaign,
     variant: link.variant,
     active: true,
+    redirect_source: "hardcoded",
+    hardcoded_target_url: link.targetUrl,
+    hardcoded_synced_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   }));
 
