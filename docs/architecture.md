@@ -44,14 +44,15 @@ The app stores:
 - campaign
 - variant
 - label
-- HTTP referrer
-- user agent
+- HTTP referrer domain
+- device type
+- browser family
 - Vercel country header
 - selected UTM query parameters
 - request path
-- click timestamp
+- click hour
 
-The app intentionally does not store IP addresses.
+The app intentionally does not store IP addresses, raw user agents, full referrer URLs, city-level geo fields, or exact click timestamps.
 
 ## Supabase
 
@@ -65,6 +66,12 @@ SUPABASE_SERVICE_ROLE_KEY
 ```
 
 The service role key is server-only and must never be exposed to client code.
+
+## Membership Dashboard Integration
+
+The membership management platform already uses Supabase Google OAuth via `auth.signInWithGoogle()` and loads dashboard access from `members_main`.
+
+For the future analytics view, add it in that repository behind the existing dashboard shell and only render it for members where `member.Role === "Board Member"` or the existing special-access flow returns true. The analytics view should read aggregate data from `link_redirect_clicks`; avoid exposing row-level raw analytics unless the board specifically needs it.
 
 ## Adding Links
 

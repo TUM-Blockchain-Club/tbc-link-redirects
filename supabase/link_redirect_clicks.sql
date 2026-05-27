@@ -8,23 +8,23 @@ create table if not exists public.link_redirect_clicks (
   campaign text,
   variant text,
   label text,
-  referrer text,
-  user_agent text,
+  referrer_domain text,
+  device_type text,
+  browser_family text,
   country text,
   query jsonb not null default '{}'::jsonb,
   request_path text not null,
-  clicked_at timestamptz not null default now(),
-  created_at timestamptz not null default now()
+  clicked_at_hour timestamptz not null
 );
 
-create index if not exists link_redirect_clicks_clicked_at_idx
-  on public.link_redirect_clicks (clicked_at desc);
+create index if not exists link_redirect_clicks_clicked_at_hour_idx
+  on public.link_redirect_clicks (clicked_at_hour desc);
 
 create index if not exists link_redirect_clicks_campaign_idx
-  on public.link_redirect_clicks (campaign, variant, clicked_at desc);
+  on public.link_redirect_clicks (campaign, variant, clicked_at_hour desc);
 
 create index if not exists link_redirect_clicks_slug_idx
-  on public.link_redirect_clicks (year, slug, clicked_at desc);
+  on public.link_redirect_clicks (year, slug, clicked_at_hour desc);
 
 alter table public.link_redirect_clicks enable row level security;
 
