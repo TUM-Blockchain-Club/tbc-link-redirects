@@ -18,7 +18,9 @@ export type RedirectLink = {
 
 export const LINKS = linkDefinitions as RedirectLink[];
 
-const linkMap = new Map(LINKS.map((link) => [`${link.year}/${link.slug}`, link]));
+const linkMap = new Map(
+  LINKS.map((link) => [`${link.year}/${link.slug}`, link]),
+);
 
 export function getRedirectLink(year: string, slug: string) {
   return linkMap.get(`${year}/${slug}`) ?? null;
@@ -51,4 +53,15 @@ export async function getSoftRedirectLink(year: string, slug: string) {
     campaign: data.campaign,
     variant: data.variant,
   } satisfies RedirectLink;
+}
+
+export function getAttributedTargetUrl(link: RedirectLink) {
+  const targetUrl = new URL(link.targetUrl);
+
+  targetUrl.searchParams.set("utm_source", link.variant || link.slug);
+  targetUrl.searchParams.set("utm_medium", "qr");
+  targetUrl.searchParams.set("utm_campaign", link.campaign);
+  targetUrl.searchParams.set("utm_content", link.slug);
+
+  return targetUrl.toString();
 }

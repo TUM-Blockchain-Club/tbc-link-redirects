@@ -32,10 +32,36 @@ If a path is not hardcoded, the route falls back to Supabase `link_redirect_defi
 1. A visitor opens `/q/[year]/[slug]`.
 2. The route resolves the hardcoded link.
 3. If no hardcoded link exists, it fetches an active Supabase soft link for the same `year` and `slug`.
-4. If neither exists, it redirects to `https://www.tum-blockchain.com/`.
-5. Next.js `after()` schedules the Supabase tracking insert after the response.
+4. The route appends outbound campaign UTM parameters to the resolved target URL.
+5. If neither exists, it redirects to `https://www.tum-blockchain.com/`.
+6. Next.js `after()` schedules the Supabase tracking insert after the response.
 
 Tracking failures are logged but do not block redirects.
+
+## Outbound UTM Parameters
+
+`getAttributedTargetUrl()` in `src/lib/links.ts` derives UTM parameters from link metadata before redirecting:
+
+```text
+utm_source=[variant or slug]
+utm_medium=qr
+utm_campaign=[campaign]
+utm_content=[slug]
+```
+
+The public QR path does not change. For example:
+
+```text
+/q/26/fly-01
+```
+
+redirects to:
+
+```text
+https://conference26.tum-blockchain.com/?utm_source=fly-01&utm_medium=qr&utm_campaign=flyer-2026&utm_content=fly-01
+```
+
+Those UTM parameters are meant to be forwarded by the conference site's Luma ticket button so Luma can attribute ticket checkouts to printed QR sources.
 
 ## Tracked Fields
 

@@ -1,5 +1,9 @@
 import { after, type NextRequest, NextResponse } from "next/server";
-import { getRedirectLink, getSoftRedirectLink } from "@/lib/links";
+import {
+  getAttributedTargetUrl,
+  getRedirectLink,
+  getSoftRedirectLink,
+} from "@/lib/links";
 import type { RedirectLink } from "@/lib/links";
 import { trackClick } from "@/lib/tracking";
 
@@ -14,7 +18,13 @@ export const dynamic = "force-dynamic";
 
 const MAIN_SITE_URL = "https://www.tum-blockchain.com/";
 
-function trackRedirect(request: NextRequest, link: RedirectLink, year: string, slug: string) {
+function trackRedirect(
+  request: NextRequest,
+  link: RedirectLink,
+  year: string,
+  slug: string,
+  targetUrl: string,
+) {
   after(async () => {
     try {
       await trackClick({
@@ -23,7 +33,7 @@ function trackRedirect(request: NextRequest, link: RedirectLink, year: string, s
         year,
         slug,
         status: "redirected",
-        targetUrl: link.targetUrl,
+        targetUrl,
       });
     } catch (error) {
       console.error("Failed to track redirect click", error);
@@ -36,16 +46,18 @@ export async function GET(request: NextRequest, context: RouteContext) {
   const link = getRedirectLink(year, slug);
 
   if (link) {
-    trackRedirect(request, link, year, slug);
-    return NextResponse.redirect(link.targetUrl, 302);
+    const targetUrl = getAttributedTargetUrl(link);
+    trackRedirect(request, link, year, slug, targetUrl);
+    return NextResponse.redirect(targetUrl, 302);
   }
 
   try {
     const softLink = await getSoftRedirectLink(year, slug);
 
     if (softLink) {
-      trackRedirect(request, softLink, year, slug);
-      return NextResponse.redirect(softLink.targetUrl, 302);
+      const targetUrl = getAttributedTargetUrl(softLink);
+      trackRedirect(request, softLink, year, slug, targetUrl);
+      return NextResponse.redirect(targetUrl, 302);
     }
   } catch (error) {
     console.error("Failed to resolve soft redirect link", error);
